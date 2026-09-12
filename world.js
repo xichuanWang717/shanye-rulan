@@ -4,7 +4,7 @@ import {createFlightTransition} from './flight-transition.js?v=42';
 import {createPavilion} from './pavilion.js?v=58';
 import {paintScene} from './painted.js?v=1';
 import {clothTexture,reopenLetter} from './story.js?v=22';
-import './journey.js?v=62';
+import './journey.js?v=71';
 import './story-thread.js?v=51';
 import './sound.js?v=50';
 import {createBird,createFish,createButterfly,curvedPetal} from './fauna.js';

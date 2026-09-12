@@ -1,0 +1,28 @@
+.language-switch{position:fixed;top:16px;right:24px;z-index:10000;display:flex;padding:4px;background:#f2eddf;border:1px solid #244b60;gap:4px;font:16px/1.3 Georgia,serif;color:#153c50}
+.language-switch button{border:0;background:transparent;color:#153c50;padding:9px 16px;min-height:40px;cursor:pointer;font:inherit}
+.language-switch button[aria-pressed=true]{background:#244b60;color:#fff8e7}
+.language-switch button:focus-visible{outline:2px solid #aa652b;outline-offset:2px}
+.reveal-workshop[open]{display:grid;grid-template-rows:minmax(0,1fr) auto;padding-top:80px;box-sizing:border-box;overflow:hidden}
+.reveal-workshop>.language-switch{position:fixed;top:max(16px,env(safe-area-inset-top));right:24px;font-size:16px;margin:0;transform:none}
+.reveal-workshop>.sound-toggle{top:22px;right:240px}
+.reveal-workshop .batik-stage{height:100%;min-height:0}
+.reveal-workshop .batik-controls{height:auto;flex-wrap:wrap;gap:10px;padding:12px 24px;max-width:100%;background:#071e31}
+.reveal-workshop .process-note{flex-basis:100%;font-size:12px;line-height:1.4}
+html[lang=en] .narrative .story{max-width:1000px;flex:1}
+html[lang=en] .narrative #title{font-size:clamp(25px,2.4vw,38px);line-height:1.15;margin-bottom:12px}
+html[lang=en] .narrative #copy{font-size:clamp(15px,1.05vw,18px);line-height:1.55;max-width:95ch}
+html[lang=en] .narrative{gap:3vw;padding-top:40px}
+.top-controls{margin-top:56px}
+dialog>.language-switch{position:absolute;top:10px;right:76px;font-size:14px}
+dialog>.language-switch button{min-height:32px;padding:6px 12px}
+html[lang=en] .cover-copy h1{font-size:clamp(40px,6vw,84px);letter-spacing:0;line-height:1.08;max-width:12ch}
+html[lang=en] .cover-copy p{max-width:65ch;line-height:1.6}
+html[lang=en] #chapter-label{writing-mode:horizontal-tb;max-width:180px;letter-spacing:0}
+html[lang=en] .memory-book:has(.story-illustration){padding-top:62px}
+html[lang=en] .memory-book:has(.story-illustration) .book-prose{height:7.4em;line-height:1.85}
+html[lang=en] .memory-book h2{letter-spacing:0;line-height:1.2;font-size:clamp(23px,2.8vw,34px)}
+html[lang=en] .narrative h1{font-size:clamp(28px,4vw,55px);letter-spacing:0;line-height:1.15}
+html[lang=en] .narrative p{line-height:1.6;max-width:65ch}
+html[lang=en] .epilogue-copy h2{font-size:clamp(30px,4vw,60px);letter-spacing:0}
+html[lang=en] button{letter-spacing:0}
+@media(max-width:600px){.language-switch{right:12px;top:10px}.language-switch button{padding:7px 10px}html[lang=en] .memory-book:has(.story-illustration) .book-prose{height:12em;line-height:1.5;font-size:16px}html[lang=en] .memory-book:has(.story-illustration){padding-top:62px}html[lang=en] .book-page{margin-bottom:6px}html[lang=en] .cover-copy{padding-top:70px}dialog>.language-switch{right:64px}}

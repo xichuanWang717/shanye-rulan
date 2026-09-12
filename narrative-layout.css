@@ -1,0 +1,9 @@
+/* One shared frame for both languages; text never determines its height. */
+html .narrative,html[lang=en] .narrative{height:190px;min-height:0;inset:auto 0 45px;padding:30px 5vw 16px;gap:3vw;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;overflow:visible}
+html .narrative .story,html[lang=en] .narrative .story{max-width:1100px;min-width:0}
+html .narrative #title{font-size:clamp(26px,2.6vw,42px);line-height:1.2;margin:0 0 14px}
+html[lang=en] .narrative #title{font-size:clamp(24px,2.1vw,36px);line-height:1.2}
+html .narrative #copy,html[lang=en] .narrative #copy{font-size:clamp(15px,1.05vw,18px);line-height:1.6;max-width:none}
+html .narrative #action{align-self:end;margin:0;max-width:290px;white-space:normal}
+@media(max-width:1100px){html .narrative,html[lang=en] .narrative{height:210px;grid-template-columns:1fr;gap:6px;padding:28px 5vw 12px}html .narrative #action{justify-self:end;padding:6px 0}html .narrative #title{font-size:26px;margin-bottom:10px}html[lang=en] .narrative #title{font-size:24px}}
+@media(max-width:600px){html .narrative,html[lang=en] .narrative{height:270px;bottom:42px;padding:26px 6vw 10px;gap:6px}html .narrative #title,html[lang=en] .narrative #title{font-size:21px;margin-bottom:8px}html .narrative #copy,html[lang=en] .narrative #copy{font-size:15px;line-height:1.5}}

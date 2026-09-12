@@ -1,10 +1,10 @@
 import {updateProgress} from './exploration-progress.js?v=58';
 import {chapters as allChapters} from './chapters.js?v=59';
 const chapters=Object.fromEntries(Object.entries(allChapters).filter(([key])=>!['vine','village'].includes(key)));
-import {storyCopy} from './story-copy.js?v=59';
+import {storyCopy} from './story-copy.js?v=64';
 for(const [key,parts] of Object.entries(storyCopy)){if(!chapters[key])continue;chapters[key].parts=parts;chapters[key].line=`读过「${chapters[key].name}」`;}
 import './six-act.js?v=22';
-import {openWorkbench as openWorkshop} from './batik-process.js?v=62';
+import {openWorkbench as openWorkshop} from './batik-process.js?v=71';
 const $=id=>document.getElementById(id);let saved={};try{saved=JSON.parse(localStorage.getItem('indigo-memories-v1')||'{}')}catch{}const collected=new Set(Object.keys(saved).filter(k=>chapters[k]));let current=null,page=0,previousFocus=null;
 const rail=document.createElement('nav');rail.className='encounters';rail.setAttribute('aria-label','在山野中停下来观察');rail.innerHTML=Object.entries(chapters).map(([k,v])=>`<button data-memory="${k}">${v.name}<span>${collected.has(k)?'已记住':'观察'}</span></button>`).join('');$('experience').append(rail);
 const journalButton=document.createElement('button');journalButton.id='journal-open';journalButton.textContent=`手记 ${collected.size}/${Object.keys(chapters).length}`;document.querySelector('.top-controls').prepend(journalButton);updateProgress();
