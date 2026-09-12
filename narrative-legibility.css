@@ -1,0 +1,9 @@
+/* Keep the reading area opaque behind text; only its upper edge fades out. */
+.narrative{background:linear-gradient(to bottom,rgba(248,243,229,0) 0,#f8f3e5 38px,#f8f3e5 100%);padding-top:56px;align-items:flex-end;isolation:isolate}
+.narrative .story{min-width:0;max-width:760px}
+.narrative #title{color:#15394e;line-height:1.3;text-shadow:none}
+.narrative #copy{color:#203e50;font-size:clamp(16px,1.2vw,19px);line-height:1.85;text-shadow:none}
+.narrative #action{color:#15394e;border-color:#15394e}
+body.flying .narrative{background:linear-gradient(to bottom,#09274300 0,#092743 38px,#092743 100%)}
+body.flying .narrative #title,body.flying .narrative #copy,body.flying .narrative #action{color:#fff2da}
+@media(max-width:700px){.narrative{padding-top:40px;background:linear-gradient(to bottom,#f8f3e500 0,#f8f3e5 24px,#f8f3e5 100%)}.narrative #copy{font-size:15px;line-height:1.75}.narrative #title{font-size:25px}}
