@@ -1,4 +1,4 @@
-import {dictionary} from './english.js?v=66';
+import {dictionary} from './english.js?v=74';
 let language='zh';try{language=localStorage.getItem('shanye-language')==='en'?'en':'zh'}catch{}
 const originals=new WeakMap(),attributes=new WeakMap();
 const entries=Object.entries(dictionary).sort((a,b)=>b[0].length-a[0].length);

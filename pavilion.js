@@ -27,7 +27,7 @@ export function createPavilion(scene){
  function update(time,dt,reduced){
   textiles.forEach((o,j)=>{const a=o.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setZ(i,reduced?0:Math.sin(a.getX(i)*3+time*1.3+j)*.055*(1-(a.getY(i)+.85)/1.7));a.needsUpdate=true;});
   group.children.filter(o=>o.userData.arms).forEach(p=>p.userData.arms.forEach((a,i)=>a.rotation.x=-.9+(reduced?0:Math.sin(time*1.7+p.userData.phase+i)*.09)));
-  if(flight>=0&&!done){flight+=dt;if(flight> (reduced?.5:8)){done=true;dispatchEvent(new Event('open-workshop'));}}
+  if(flight>=0&&!done){flight+=dt;if(flight> (reduced?.5:8)){done=true;dispatchEvent(new Event('pavilion-flight-complete'));}}
   flock.forEach((o,i)=>{const rise=Math.max(0,flight-(i%8)*.12),spread=Math.min(1,rise/3);o.b.position.set(Math.sin(rise*.55+o.offset)*(1+spread*7)+(i%7-3)*spread,2.4+rise*1.25+rise*rise*.11+(i%5)*.48,-14+(i%6)*1.2+rise*(i%9===0?2.1:-.3));o.b.visible=flight>=0&&!done&&flight>=(i%8)*.12;o.b.rotation.z=Math.sin(rise*.8+o.offset)*.18;o.wings.forEach(w=>w.rotation.z=w.userData.side*(.25+Math.sin(time*12+o.offset)*.65));});
  }
  return {group,update,launch,bird:bird.b,get flying(){return flight>=0&&!done;},get flightTime(){return Math.max(0,flight);},reset(){flight=-1;done=false;}};
