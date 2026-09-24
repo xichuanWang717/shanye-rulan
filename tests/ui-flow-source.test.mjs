@@ -38,11 +38,10 @@ test('entry points use new cache versions for every changed module', async () =>
   const language = await read('language.js');
   assert.match(index, /world\.js\?v=74/);
   assert.match(index, /language\.js\?v=74/);
-  assert.match(world, /pavilion\.js\?v=72/);
+  assert.match(world, /pavilion\.js\?v=73/);
   assert.match(world, /journey\.js\?v=73/);
   assert.match(world, /story-thread\.js\?v=72/);
   assert.match(journey, /exploration-progress\.js\?v=72/);
   assert.match(journey, /batik-process\.js\?v=73/);
   assert.match(language, /english\.js\?v=74/);
 });
-

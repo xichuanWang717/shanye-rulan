@@ -1,6 +1,7 @@
 import {allowFlight} from './exploration-progress.js?v=58';
 import * as T from './three.module.js';
 import {createBird} from './fauna.js';
+import {getPavilionBirdPosition} from './pavilion-flight-path.js?v=1';
 export function createPavilion(scene){
  const group=new T.Group();scene.add(group);group.position.set(3.8,0,-16);group.scale.setScalar(.62);
  const wood=new T.MeshStandardMaterial({color:'#715038',roughness:1}),roof=new T.MeshStandardMaterial({color:'#234657',roughness:1}),paper=new T.MeshStandardMaterial({color:'#eee3c9',roughness:1});
@@ -28,7 +29,7 @@ export function createPavilion(scene){
   textiles.forEach((o,j)=>{const a=o.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setZ(i,reduced?0:Math.sin(a.getX(i)*3+time*1.3+j)*.055*(1-(a.getY(i)+.85)/1.7));a.needsUpdate=true;});
   group.children.filter(o=>o.userData.arms).forEach(p=>p.userData.arms.forEach((a,i)=>a.rotation.x=-.9+(reduced?0:Math.sin(time*1.7+p.userData.phase+i)*.09)));
   if(flight>=0&&!done){flight+=dt;if(flight> (reduced?.5:8)){done=true;dispatchEvent(new Event('pavilion-flight-complete'));}}
-  flock.forEach((o,i)=>{const rise=Math.max(0,flight-(i%8)*.12),spread=Math.min(1,rise/3);o.b.position.set(Math.sin(rise*.55+o.offset)*(1+spread*7)+(i%7-3)*spread,2.4+rise*1.25+rise*rise*.11+(i%5)*.48,-14+(i%6)*1.2+rise*(i%9===0?2.1:-.3));o.b.visible=flight>=0&&!done&&flight>=(i%8)*.12;o.b.rotation.z=Math.sin(rise*.8+o.offset)*.18;o.wings.forEach(w=>w.rotation.z=w.userData.side*(.25+Math.sin(time*12+o.offset)*.65));});
+  flock.forEach((o,i)=>{const rise=Math.max(0,flight-(i%8)*.12),position=getPavilionBirdPosition(rise,i);o.b.position.set(position.x,position.y,position.z);o.b.visible=flight>=0&&!done&&flight>=(i%8)*.12;o.b.rotation.z=Math.sin(rise*.8+o.offset)*.18;o.wings.forEach(w=>w.rotation.z=w.userData.side*(.25+Math.sin(time*12+o.offset)*.65));});
  }
  return {group,update,launch,bird:bird.b,get flying(){return flight>=0&&!done;},get flightTime(){return Math.max(0,flight);},reset(){flight=-1;done=false;}};
 }

@@ -1,7 +1,7 @@
 import {addLandmarks} from './encounter-landmarks.js?v=60';
 import * as T from './three.module.js';
 import {createFlightTransition} from './flight-transition.js?v=42';
-import {createPavilion} from './pavilion.js?v=72';
+import {createPavilion} from './pavilion.js?v=73';
 import {paintScene} from './painted.js?v=1';
 import {clothTexture,reopenLetter} from './story.js?v=22';
 import './journey.js?v=73';
