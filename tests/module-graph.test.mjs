@@ -30,4 +30,3 @@ test('browser entry modules have a complete local dependency graph', async () =>
 
   assert.deepEqual(missing.sort(), [], `Missing browser modules: ${missing.sort().join(', ')}`);
 });
-

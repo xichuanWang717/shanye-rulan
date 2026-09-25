@@ -43,4 +43,3 @@ export function resetJourney() {
   announce('journey-progress-changed', []);
   announce('journey-reset', null);
 }
-

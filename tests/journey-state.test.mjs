@@ -52,4 +52,3 @@ test('completion requires all six known memories', async () => {
   state.collectMemory('bird');
   assert.equal(state.isCollectionComplete(), true);
 });
-

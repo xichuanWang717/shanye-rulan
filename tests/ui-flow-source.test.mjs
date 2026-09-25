@@ -24,6 +24,23 @@ test('workshop offers mutually exclusive manual and automatic modes', async () =
   assert.match(process, /clearTimeout\(autoTimer\)/);
 });
 
+test('workshop mode chooser sits above the canvas and respects its hidden state', async () => {
+  const processCss = await read('process.css');
+  const world = await read('world.js');
+  assert.match(processCss, /\.process-mode-choice\s*\{[^}]*position:\s*absolute/s);
+  assert.match(processCss, /\.process-mode-choice\s*\{[^}]*z-index:\s*\d+/s);
+  assert.match(processCss, /\.process-mode-choice\[hidden\]\s*\{[^}]*display:\s*none\s*!important/s);
+  assert.doesNotMatch(world, /\.process-mode-choice\{display:flex/);
+});
+
+test('the primary action has one state-aware click handler', async () => {
+  const world = await read('world.js');
+  assert.equal((world.match(/el\('action'\)\.(?:onclick|addEventListener)\s*=/g) || []).length, 0);
+  assert.equal((world.match(/el\('action'\)\.addEventListener\('click',handleJourneyAction\)/g) || []).length, 1);
+  assert.match(world, /function handleJourneyAction\(\)[\s\S]*?pavilion\.flying/);
+  assert.match(world, /function handleJourneyAction\(\)[\s\S]*?pavilion\.launch\(\)/);
+  assert.match(world, /function handleJourneyAction\(\)[\s\S]*?open-workshop/);
+});
 test('restart is confirmed and delegates clearing to the journey state', async () => {
   const world = await read('world.js');
   assert.match(world, /restart-confirm/);
@@ -36,7 +53,8 @@ test('entry points use new cache versions for every changed module', async () =>
   const world = await read('world.js');
   const journey = await read('journey.js');
   const language = await read('language.js');
-  assert.match(index, /world\.js\?v=74/);
+  assert.match(index, /world\.js\?v=75/);
+  assert.match(index, /process\.css\?v=41/);
   assert.match(index, /language\.js\?v=74/);
   assert.match(world, /pavilion\.js\?v=73/);
   assert.match(world, /journey\.js\?v=73/);

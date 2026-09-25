@@ -33,4 +33,3 @@ test('preview does not reference missing local stylesheets or images', async () 
 
   assert.deepEqual(missing, [], `Missing preview assets: ${missing.join(', ')}`);
 });
-
