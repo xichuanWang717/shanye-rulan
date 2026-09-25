@@ -14,3 +14,33 @@ export function getPavilionBirdPosition(rise, index) {
     z: -14 + (index % 6) * 0.65 - rise * (0.35 + (index % 3) * 0.05),
   };
 }
+
+export function getPavilionFlockFocus(flightTime) {
+  let x = 0;
+  let y = 0;
+  let z = 0;
+  let visibleCount = 0;
+
+  for (let index = 0; index < 48; index += 1) {
+    const delay = (index % 8) * 0.12;
+    if (flightTime < delay) continue;
+    const bird = getPavilionBirdPosition(Math.max(0, flightTime - delay), index);
+    x += bird.x;
+    y += bird.y;
+    z += bird.z;
+    visibleCount += 1;
+  }
+
+  return {
+    x: x / visibleCount,
+    y: y / visibleCount,
+    z: z / visibleCount,
+  };
+}
+
+export function aimPavilionCamera(camera, flightTime, reduced = false) {
+  const focus = getPavilionFlockFocus(reduced ? 0 : flightTime);
+  camera.position.x = focus.x;
+  camera.lookAt(focus.x, focus.y, focus.z);
+  return focus;
+}

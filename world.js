@@ -1,7 +1,8 @@
 import {addLandmarks} from './encounter-landmarks.js?v=60';
 import * as T from './three.module.js';
-import {createFlightTransition} from './flight-transition.js?v=42';
-import {createPavilion} from './pavilion.js?v=73';
+import {createFlightTransition} from './flight-transition.js?v=43';
+import {aimPavilionCamera} from './pavilion-flight-path.js?v=2';
+import {createPavilion} from './pavilion.js?v=74';
 import {paintScene} from './painted.js?v=1';
 import {clothTexture,reopenLetter} from './story.js?v=22';
 import './journey.js?v=73';
@@ -141,8 +142,7 @@ const ending=smooth((p-.87)/.12);textile.visible=clothCompleted&&ending>.001;tex
 fishSchool.forEach((o,i)=>{const phase=elapsed*.16+i*.55,u=.17+.055*(1+Math.sin(phase));const point=riverPath.getPoint(u),tangent=riverPath.getTangent(u),normal=new T.Vector3(-tangent.z,0,tangent.x);o.position.copy(point).addScaledVector(normal,Math.sin(elapsed*.7+i)*.38);o.position.y=.02;o.rotation.y=Math.atan2(-tangent.x,-tangent.z)+(Math.cos(phase)<0?Math.PI:0)+Math.sin(elapsed*4+i)*.08;const tail=o.children[o.children.length-2];tail.rotation.y=Math.sin(elapsed*6+i)*.3;});
 ripples.forEach(o=>{const flow=o.userData.flow,u=(flow.u+(reduced?0:elapsed*.018))%1,point=riverPath.getPoint(u),tangent=riverPath.getTangent(u);o.position.set(point.x-tangent.z*flow.offset,.375,point.z+tangent.x*flow.offset);o.rotation.z=Math.atan2(tangent.x,tangent.z);});butterflies.forEach((o,i)=>{const entry=smooth((elapsed-birdEntryStart-1-i*.4)/4);o.b.position.set(mix(10,4.3+i*.48,entry)+Math.sin(elapsed*.6+i)*.42,1.55+Math.sin(elapsed*.9+i)*.22,1.8-i*1.5);o.b.rotation.y=-.4;for(const w of o.wings)w.rotation.y=w.userData.side*Math.sin(elapsed*5+i)*.65});const birdEntry=smooth((elapsed-birdEntryStart)/4.5);perched.b.position.set(mix(-12,-3.8,birdEntry)+Math.sin(elapsed*.55)*.28,3.25+Math.sin(elapsed*.8)*.12,-1);perched.b.rotation.y=-.9;perched.wings.forEach(w=>w.rotation.z=w.userData.side*(.45+(reduced?0:Math.sin(elapsed*5)*.45)));waterMaterial.uniforms.time.value=reduced?0:elapsed;
 pavilion.group.visible=p<.58||pavilion.flying;pavilion.update(elapsed,playing?dt:0,reduced);pavilion.group.visible=p<.58||pavilion.flying;el('action').disabled=pavilion.flying;if(pavilion.flying){el('title').textContent='鸟从布上醒来，飞向山野。';el('copy').textContent='一只鸟带起另一只鸟，蜡染里的花与水也跟着舒展。抬头，跟随它们的方向。';el('action').textContent='鸟群正在飞向蓝布…'}else if(p<.58){el('title').textContent='远处的染亭，正在晾晒山野。';el('copy').textContent='两个人在亭中点蜡，蓝布随风轻轻起伏。移动鼠标观看山谷，收集六段山野记忆，再轻触亭中的蓝布，让鸟群带你继续。';el('action').textContent='轻触蓝布，继续旅程 →';el('chapter-label').textContent='山野 · 染亭'}
-flightVeil.style.opacity=pavilion.flying?smooth((pavilion.flightTime-7.6)/.4):0;
-updateFlightTransition(pavilion.flightTime,pavilion.flying,reduced);
-if(pavilion.flying&&!reduced){const rise=smooth(pavilion.flightTime/8);camera.position.y+=rise*7;camera.lookAt(0,2+rise*18,-14);}
+const flightFrame=updateFlightTransition(pavilion.flightTime,pavilion.flying,reduced);flightVeil.style.opacity=flightFrame.veil;
+if(pavilion.flying)aimPavilionCamera(camera,pavilion.flightTime,reduced);
 updateLandmarks(reduced?0:elapsed);renderer.render(scene,camera)}
 requestAnimationFrame(animate);window.addEventListener('error',()=>el('error').hidden=false);
