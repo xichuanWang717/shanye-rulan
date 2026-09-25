@@ -25,3 +25,14 @@ test('the flock climbs through the open right-hand corridor', () => {
     }
   }
 });
+
+test('the flock gathers toward the center before becoming particles', () => {
+  const spreadAt = time => {
+    const positions = Array.from({length: 48}, (_, index) =>
+      getPavilionBirdPosition(Math.max(0, time - (index % 8) * 0.12), index));
+    const centerX = positions.reduce((sum, bird) => sum + bird.x, 0) / positions.length;
+    const centerY = positions.reduce((sum, bird) => sum + bird.y, 0) / positions.length;
+    return positions.reduce((sum, bird) => sum + Math.hypot(bird.x - centerX, bird.y - centerY), 0) / positions.length;
+  };
+  assert.ok(spreadAt(3.5) < spreadAt(2.5) * 0.65);
+});

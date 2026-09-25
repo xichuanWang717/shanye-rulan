@@ -1,8 +1,8 @@
 import {addLandmarks} from './encounter-landmarks.js?v=60';
 import * as T from './three.module.js';
-import {createFlightTransition} from './flight-transition.js?v=43';
-import {aimPavilionCamera} from './pavilion-flight-path.js?v=2';
-import {createPavilion} from './pavilion.js?v=74';
+import {createFlightTransition} from './flight-transition.js?v=44';
+import {aimPavilionCamera} from './pavilion-flight-path.js?v=3';
+import {createPavilion} from './pavilion.js?v=75';
 import {paintScene} from './painted.js?v=1';
 import {clothTexture,reopenLetter} from './story.js?v=22';
 import './journey.js?v=73';
